@@ -1,0 +1,13 @@
+{
+  "files.associations": {
+    "any": "c",
+    "complex": "c",
+    "graphics.h": "c",
+    "engine.h": "c",
+    "stdlib.h": "c",
+    "entity.h": "c",
+    "sprite_utils.h": "c",
+    "game_loop.h": "c",
+    "fps_display.h": "c"
+  }
+}
