@@ -9,8 +9,6 @@
 #include "engine.h"
 #include "entity.h"
 #include "entities/fps_display.h"
-#include <stdio.h>
-#include "lib/list/list.h"
 
 const int speed = 400;
 
@@ -38,7 +36,7 @@ void init_entities(game_engine *engine)
         &on_cat_update
     );
     game_entity *fps_displayer = create_fps_displayer(font);
-    
+
     register_entity(engine, entity);
     register_entity(engine, fps_displayer);
 }

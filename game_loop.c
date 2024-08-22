@@ -6,8 +6,6 @@
 */
 
 #include "game_loop.h"
-#include <stdio.h>
-
 
 void default_event_handler(sfRenderWindow *window, sfEvent *event)
 {

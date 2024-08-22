@@ -8,7 +8,6 @@
 #include "entity.h"
 #include "sprite_utils.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 game_entity *create_game_entity(
     char *value,

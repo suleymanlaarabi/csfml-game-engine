@@ -9,7 +9,6 @@
 #include "game_loop.h"
 #include "lib/list/list.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 game_engine *create_engine(
     char *title,
@@ -37,14 +36,11 @@ void clean_game(game_engine *engine, sfClock *clock)
     list_entity *temp = engine->entities;
 
     while (temp != NULL) {
-        switch (temp->value->type)
-        {
-        case SPRITE:
-            sfSprite_destroy(temp->value->element.sprite);
-            break;
-        case TEXT:
-            sfText_destroy(temp->value->element.text);
-            break;
+        switch (temp->value->type) {
+            case SPRITE:
+                sfSprite_destroy(temp->value->element.sprite);
+            case TEXT:
+                sfText_destroy(temp->value->element.text);
         }
         free(temp);
     }

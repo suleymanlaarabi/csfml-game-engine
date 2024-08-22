@@ -16,7 +16,7 @@ struct game_engine;
 typedef void (*window_update_event)(sfEvent*);
 typedef void (*window_update_func)(float, struct sfRenderWindow*);
 
-typedef struct {
+typedef struct game_engine {
     sfRenderWindow *window;
     window_update_func on_update;
     window_update_event on_event;
