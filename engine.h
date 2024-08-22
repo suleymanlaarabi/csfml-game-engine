@@ -11,6 +11,7 @@
     #include "entity.h"
     #include "lib/list/list.h"
 
+struct scene_entity;
 struct game_engine;
 
 typedef void (*window_update_event)(sfEvent*);
@@ -20,7 +21,7 @@ typedef struct game_engine {
     sfRenderWindow *window;
     window_update_func on_update;
     window_update_event on_event;
-    list_entity *entities;
+    struct scene_entity *scene;
 } game_engine;
 
 game_engine *create_engine(
@@ -28,7 +29,6 @@ game_engine *create_engine(
     window_update_func on_update,
     window_update_event on_event
 );
-void register_entity(game_engine *engine, game_entity *entity);
 int run_game(game_engine *engine);
 
 #endif

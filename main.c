@@ -8,7 +8,9 @@
 #include <SFML/Graphics.h>
 #include "engine.h"
 #include "entity.h"
+#include "scenes.h"
 #include "entities/fps_display.h"
+#include <stdio.h>
 
 const int speed = 400;
 
@@ -27,8 +29,9 @@ static void on_cat_update(float delta, game_entity *entity)
     sfSprite_setPosition(entity->element.sprite, position);
 }
 
-void init_entities(game_engine *engine)
+scene_entity *default_scene(game_engine *engine)
 {
+    scene_entity *scene;
     sfFont *font = sfFont_createFromFile("assets/arial.ttf");
     game_entity *entity = create_game_entity(
         "assets/cat.png",
@@ -37,8 +40,15 @@ void init_entities(game_engine *engine)
     );
     game_entity *fps_displayer = create_fps_displayer(font);
 
-    register_entity(engine, entity);
-    register_entity(engine, fps_displayer);
+    scene = create_scene(
+        new_list_entity(),
+        NULL,
+        NULL,
+        "assets/coloss.mp3"
+    );
+    register_entity(scene, entity);
+    register_entity(scene, fps_displayer);
+    return scene;
 }
 
 int main()
@@ -48,8 +58,9 @@ int main()
         NULL,
         NULL
     );
+    scene_entity *scene = default_scene(engine);
 
-    init_entities(engine);
+    engine->scene = scene;
     sfRenderWindow_setFramerateLimit(engine->window, 120);
     return run_game(engine);
 }

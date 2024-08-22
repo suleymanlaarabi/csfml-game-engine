@@ -24,7 +24,7 @@ void check_event(game_engine *engine, sfEvent *event, float delta_time)
 
 void process_entity(game_engine *engine, float delta_time)
 {
-    list_entity *temp = engine->entities;
+    list_entity *temp = engine->scene->entities;
     entity_element el;
 
     while (temp != NULL) {

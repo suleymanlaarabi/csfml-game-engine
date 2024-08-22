@@ -7,6 +7,7 @@
 
 #include "engine.h"
 #include "game_loop.h"
+#include "scenes.h"
 #include "lib/list/list.h"
 #include <stdlib.h>
 
@@ -27,13 +28,13 @@ game_engine *create_engine(
     );
     engine->on_update = on_update;
     engine->on_event = on_event;
-    engine->entities = new_list_entity();
+    engine->scene = NULL;
     return engine;
 }
 
 void clean_game(game_engine *engine, sfClock *clock)
 {
-    list_entity *temp = engine->entities;
+    list_entity *temp = engine->scene->entities;
 
     while (temp != NULL) {
         switch (temp->value->type) {
@@ -45,11 +46,6 @@ void clean_game(game_engine *engine, sfClock *clock)
         free(temp);
     }
     sfClock_destroy(clock);
-}
-
-void register_entity(game_engine *engine, game_entity *entity)
-{
-    engine->entities = push_back_entity(engine->entities, entity);
 }
 
 int run_game(game_engine *engine)

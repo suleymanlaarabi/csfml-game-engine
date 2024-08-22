@@ -8,6 +8,8 @@
     "entity.h": "c",
     "sprite_utils.h": "c",
     "game_loop.h": "c",
-    "fps_display.h": "c"
+    "fps_display.h": "c",
+    "scenes.h": "c",
+    "list.h": "c"
   }
 }
