@@ -6,6 +6,7 @@
 */
 
 #include "game_loop.h"
+#include <stdio.h>
 
 void default_event_handler(sfRenderWindow *window, sfEvent *event)
 {
@@ -25,15 +26,21 @@ void check_event(game_engine *engine, sfEvent *event, float delta_time)
 void process_entity(game_engine *engine, float delta_time)
 {
     list_entity *temp = engine->scene->entities;
-    entity_element el;
+    entity_element *el;
 
     while (temp != NULL) {
         el = temp->value->element;
         switch (temp->value->type) {
             case SPRITE:
-                sfRenderWindow_drawSprite(engine->window, el.sprite, NULL);
+                sfRenderWindow_drawSprite(engine->window, el->sprite, NULL);
+                break;
             case TEXT:
-                sfRenderWindow_drawText(engine->window, el.text, NULL);
+                sfRenderWindow_drawText(engine->window, el->text, NULL);
+                break;
+            case ANIMATED_SPRITE:
+                update_animation(el->animated_sprite, delta_time);
+                sfRenderWindow_drawSprite(
+                    engine->window, el->animated_sprite->tiles->sprite, NULL);
         }
         if (temp->value->on_update)
             temp->value->on_update(delta_time, temp->value);

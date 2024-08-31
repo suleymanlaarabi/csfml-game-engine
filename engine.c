@@ -10,12 +10,12 @@
 #include "scenes.h"
 #include "lib/list/list.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 game_engine *create_engine(
     char *title,
     window_update_func on_update,
-    window_update_event on_event
-)
+    window_update_event on_event)
 {
     game_engine *engine = malloc(sizeof(game_engine));
     sfVideoMode video_mode = {1920, 1080, 32};
@@ -24,8 +24,7 @@ game_engine *create_engine(
         video_mode,
         title,
         sfResize | sfClose,
-        NULL
-    );
+        NULL);
     engine->on_update = on_update;
     engine->on_event = on_event;
     engine->scene = NULL;
@@ -39,11 +38,20 @@ void clean_game(game_engine *engine, sfClock *clock)
     while (temp != NULL) {
         switch (temp->value->type) {
             case SPRITE:
-                sfSprite_destroy(temp->value->element.sprite);
+                sfSprite_destroy(temp->value->element->sprite);
+                break;
             case TEXT:
-                sfText_destroy(temp->value->element.text);
+                sfText_destroy(temp->value->element->text);
+                break;
+            case ANIMATED_SPRITE:
+                sfSprite_destroy(
+                    temp->value->element->animated_sprite->tiles->sprite);
+                break;
         }
+        free(temp->value->element);
+        free(temp->value);
         free(temp);
+        temp = temp->next;
     }
     sfClock_destroy(clock);
 }

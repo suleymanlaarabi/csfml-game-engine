@@ -10,6 +10,8 @@
     "game_loop.h": "c",
     "fps_display.h": "c",
     "scenes.h": "c",
-    "list.h": "c"
+    "list.h": "c",
+    "animation.h": "c",
+    "source_location": "c"
   }
 }
