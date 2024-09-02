@@ -7,6 +7,7 @@
 
 #include "scenes.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <SFML/Audio.h>
 
 scene_entity *create_scene(

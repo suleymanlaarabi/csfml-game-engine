@@ -30,3 +30,19 @@ tiles_sprite *create_tiles_sprite(
     tiles_set->sprite = create_sprite_with_texture(tiles_path);
     return tiles_set;
 }
+
+void flip_sprite(sfSprite *sprite)
+{
+    sfVector2f scale = sfSprite_getScale(sprite);
+
+    sfSprite_setScale(sprite, (sfVector2f) {-scale.x, scale.y});
+}
+
+sfBool is_flipped(sfSprite *sprite)
+{
+    sfVector2f scale = sfSprite_getScale(sprite);
+
+    if (scale.x < 0)
+        return sfTrue;
+    return sfFalse;
+}

@@ -24,4 +24,7 @@ tiles_sprite *create_tiles_sprite(
     float sprite_width
 );
 
+void flip_sprite(sfSprite *sprite);
+sfBool is_flipped(sfSprite *sprite);
+
 #endif

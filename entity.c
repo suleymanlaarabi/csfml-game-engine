@@ -45,3 +45,14 @@ entity_element *create_entity_element(
     entity->animated_sprite = element;
     return entity;
 }
+
+sfSprite *get_entity_sprite(game_entity *entity)
+{
+    switch (entity->type) {
+        case ANIMATED_SPRITE:
+            return entity->element->animated_sprite->tiles->sprite;
+        case SPRITE:
+            return entity->element->sprite;
+    }
+    return NULL;
+}

@@ -19,7 +19,7 @@ void on_fps_display_update(float delta_time, game_entity *entity)
 game_entity *create_fps_displayer(sfFont *font)
 {
     game_entity *entity = create_game_entity(
-        "",
+        NULL,
         TEXT,
         &on_fps_display_update,
         NULL

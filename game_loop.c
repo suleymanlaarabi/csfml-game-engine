@@ -23,25 +23,38 @@ void check_event(game_engine *engine, sfEvent *event, float delta_time)
     }
 }
 
+void draw_entity(game_engine *engine, game_entity *entity)
+{
+    switch (entity->type) {
+        case SPRITE:
+            sfRenderWindow_drawSprite(
+                engine->window, entity->element->sprite, NULL);
+            break;
+        case TEXT:
+            sfRenderWindow_drawText(
+                engine->window, entity->element->text, NULL);
+            break;
+        case ANIMATED_SPRITE:
+            update_animation(
+                entity->element->animated_sprite, 0.1);
+            sfRenderWindow_drawSprite(
+                engine->window,
+                entity->element->animated_sprite->tiles->sprite,
+                NULL);
+    }
+}
+
 void process_entity(game_engine *engine, float delta_time)
 {
-    list_entity *temp = engine->scene->entities;
+    list_entity *temp;
     entity_element *el;
 
+    if (engine->scene == NULL)
+        return;
+    temp = engine->scene->entities;
     while (temp != NULL) {
         el = temp->value->element;
-        switch (temp->value->type) {
-            case SPRITE:
-                sfRenderWindow_drawSprite(engine->window, el->sprite, NULL);
-                break;
-            case TEXT:
-                sfRenderWindow_drawText(engine->window, el->text, NULL);
-                break;
-            case ANIMATED_SPRITE:
-                update_animation(el->animated_sprite, delta_time);
-                sfRenderWindow_drawSprite(
-                    engine->window, el->animated_sprite->tiles->sprite, NULL);
-        }
+        draw_entity(engine, temp->value);
         if (temp->value->on_update)
             temp->value->on_update(delta_time, temp->value);
         temp = temp->next;

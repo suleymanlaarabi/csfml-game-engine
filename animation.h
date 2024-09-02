@@ -31,4 +31,11 @@ void set_animated_sprite_frame(
 );
 void update_animation(animated_sprite *element, float delta);
 
+void set_animation(
+    animated_sprite *element,
+    short animation_start,
+    short animation_end,
+    float speed
+);
+
 #endif

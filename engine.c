@@ -46,7 +46,6 @@ void clean_game(game_engine *engine, sfClock *clock)
             case ANIMATED_SPRITE:
                 sfSprite_destroy(
                     temp->value->element->animated_sprite->tiles->sprite);
-                break;
         }
         free(temp->value->element);
         free(temp->value);
@@ -69,6 +68,8 @@ int run_game(game_engine *engine)
         process_entity(engine, delta_time);
         if (engine->on_update)
             engine->on_update(delta_time, engine->window);
+        if (engine->scene->on_update)
+            engine->scene->on_update(delta_time, engine->scene);
         sfRenderWindow_display(engine->window);
     }
     clean_game(engine, clock);

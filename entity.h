@@ -45,4 +45,6 @@ entity_element *create_entity_element(
     void *element
 );
 
+sfSprite *get_entity_sprite(game_entity *entity);
+
 #endif
