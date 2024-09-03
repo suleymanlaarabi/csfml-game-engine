@@ -9,8 +9,10 @@
     #define INCLUDED_ANIMATION_H
     #include "sprite_utils.h"
 
+struct tiles_sprite;
+
 typedef struct animated_sprite {
-    tiles_sprite *tiles;
+    struct tiles_sprite *tiles;
     short animation_start;
     short animation_end;
     float speed;
@@ -22,7 +24,7 @@ animated_sprite *create_animated_sprite(
     short start,
     short end,
     float speed,
-    tiles_sprite *sprites
+    struct tiles_sprite *sprites
 );
 
 void set_animated_sprite_frame(

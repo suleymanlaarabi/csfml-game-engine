@@ -8,6 +8,9 @@
 #ifndef INCLUDED_SPRITE_UTILS_H
     #define INCLUDED_SPRITE_UTILS_H
     #include <SFML/Graphics.h>
+    #include "entity.h"
+
+struct game_entity;
 
 typedef struct tiles_sprite {
     float width;
@@ -23,6 +26,7 @@ tiles_sprite *create_tiles_sprite(
     float sprite_height,
     float sprite_width
 );
+sfBool is_clicked_by_mouse(struct game_entity *entity);
 
 void flip_sprite(sfSprite *sprite);
 sfBool is_flipped(sfSprite *sprite);

@@ -10,6 +10,6 @@
     #include <SFML/Graphics.h>
     #include "../entity.h"
 
-game_entity *create_fps_displayer(sfFont *font);
+game_entity *create_fps_displayer(sfFont *font, struct game_engine *engine);
 
 #endif

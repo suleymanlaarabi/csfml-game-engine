@@ -6,7 +6,11 @@
 */
 
 #include "sprite_utils.h"
+#include "entity.h"
+#include "engine.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include <SFML/Graphics.h>
 
 sfSprite *create_sprite_with_texture(char texture[])
 {
@@ -43,6 +47,23 @@ sfBool is_flipped(sfSprite *sprite)
     sfVector2f scale = sfSprite_getScale(sprite);
 
     if (scale.x < 0)
+        return sfTrue;
+    return sfFalse;
+}
+
+sfBool is_clicked_by_mouse(game_entity *entity)
+{
+    sfFloatRect rect = sfSprite_getGlobalBounds(entity->element->sprite);
+    sfVector2i mouse_position =
+        sfMouse_getPositionRenderWindow(entity->engine->window);
+
+    if (
+        mouse_position.x >= rect.left  &&
+        mouse_position.x <= rect.left + rect.width &&
+        mouse_position.y <= rect.top + rect.height &&
+        mouse_position.y >= rect.top &&
+        sfMouse_isButtonPressed(sfMouseLeft)
+        )
         return sfTrue;
     return sfFalse;
 }

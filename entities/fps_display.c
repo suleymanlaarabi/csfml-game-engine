@@ -6,6 +6,7 @@
 */
 
 #include "fps_display.h"
+#include "../engine.h"
 #include <stdio.h>
 
 void on_fps_display_update(float delta_time, game_entity *entity)
@@ -16,16 +17,17 @@ void on_fps_display_update(float delta_time, game_entity *entity)
     sfText_setString(entity->element->text, text);
 }
 
-game_entity *create_fps_displayer(sfFont *font)
+game_entity *create_fps_displayer(sfFont *font, game_engine *engine)
 {
     game_entity *entity = create_game_entity(
         NULL,
         TEXT,
-        &on_fps_display_update,
-        NULL
+        NULL,
+        engine
     );
     sfVector2f position = {10, 10};
 
+    entity->on_update = &on_fps_display_update;
     sfText_setFont(entity->element->text, font);
     sfText_setCharacterSize(entity->element->text, 50);
     sfText_setColor(entity->element->text, sfWhite);

@@ -7,14 +7,15 @@
 
 #include "entity.h"
 #include "sprite_utils.h"
+#include "engine.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 game_entity *create_game_entity(
     char *value,
     EntityElementType type,
-    entity_update_func on_update,
-    entity_element *from_element
+    entity_element *from_element,
+    game_engine *engine
 )
 {
     game_entity *entity = malloc(sizeof(game_entity));
@@ -30,8 +31,9 @@ game_entity *create_game_entity(
     } else {
         entity->element = from_element;
     }
+    entity->on_update = NULL;
+    entity->engine = engine;
     entity->type = type;
-    entity->on_update = on_update;
     entity->is_enabled = sfTrue;
     return entity;
 }

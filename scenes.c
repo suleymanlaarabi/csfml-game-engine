@@ -24,7 +24,6 @@ scene_entity *create_scene(
     scene->on_update = update_func;
     if (music_path) {
         scene->music = sfMusic_createFromFile(music_path);
-        sfMusic_play(scene->music);
     } else {
         scene->music = NULL;
     }
@@ -38,6 +37,8 @@ void register_entity(scene_entity *scene, game_entity *entity)
 
 void load_scene(game_engine *engine, scene_entity *scene)
 {
-    scene->on_init(scene);
+    scene->on_init(scene, engine);
+    if (scene->music)
+        sfMusic_play(scene->music);
     engine->scene = scene;
 }

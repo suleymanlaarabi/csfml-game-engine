@@ -12,13 +12,15 @@
     #include "animation.h"
 
 struct game_entity;
+struct game_engine;
+struct animated_sprite;
 
 typedef void (*entity_update_func)(float, struct game_entity *);
 
 typedef union {
     sfSprite *sprite;
     sfText *text;
-    animated_sprite *animated_sprite;
+    struct animated_sprite *animated_sprite;
 } entity_element;
 
 typedef enum EntityElementType {
@@ -28,6 +30,7 @@ typedef enum EntityElementType {
 } EntityElementType;
 
 typedef struct game_entity {
+    struct game_engine *engine;
     entity_update_func on_update;
     sfBool is_enabled;
     entity_element *element;
@@ -37,8 +40,8 @@ typedef struct game_entity {
 game_entity *create_game_entity(
     char *value,
     EntityElementType type,
-    entity_update_func on_update,
-    entity_element *from_element
+    entity_element *from_element,
+    struct game_engine *engine
 );
 
 entity_element *create_entity_element(

@@ -13,7 +13,7 @@
 struct scene_entity;
 
 typedef void (*scene_update_func)(float, struct scene_entity*);
-typedef void (*scene_init_func)(struct scene_entity*);
+typedef void (*scene_init_func)(struct scene_entity*, game_engine*);
 
 typedef struct scene_entity {
     list_entity *entities;
